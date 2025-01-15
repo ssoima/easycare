@@ -1,0 +1,2214 @@
+{
+  "links": [
+    {
+      "from": 0,
+      "paramMapping": [],
+      "to": 9,
+      "data": {
+        "io": [],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 9,
+      "paramMapping": [
+        {
+          "from": "input",
+          "to": "text"
+        }
+      ],
+      "to": 1,
+      "data": {
+        "io": [
+          {
+            "input": "text",
+            "output": "input"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 1,
+      "paramMapping": [
+        {
+          "from": "data",
+          "to": "output"
+        }
+      ],
+      "to": 5,
+      "data": {
+        "io": [
+          {
+            "input": "output",
+            "output": "data"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 9,
+      "paramMapping": [
+        {
+          "from": "input",
+          "to": "text"
+        }
+      ],
+      "to": 2,
+      "data": {
+        "io": [
+          {
+            "input": "text",
+            "output": "input"
+          }
+        ],
+        "isNew": false,
+        "isFocused": true
+      }
+    },
+    {
+      "from": 2,
+      "paramMapping": [
+        {
+          "from": "data",
+          "to": "output"
+        }
+      ],
+      "to": 6,
+      "data": {
+        "io": [
+          {
+            "input": "output",
+            "output": "data"
+          }
+        ],
+        "isNew": false,
+        "isFocused": true
+      }
+    },
+    {
+      "from": 9,
+      "paramMapping": [
+        {
+          "from": "input",
+          "to": "text"
+        }
+      ],
+      "to": 3,
+      "data": {
+        "io": [
+          {
+            "input": "text",
+            "output": "input"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 9,
+      "paramMapping": [
+        {
+          "from": "input",
+          "to": "text"
+        }
+      ],
+      "to": 4,
+      "data": {
+        "io": [
+          {
+            "input": "text",
+            "output": "input"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 3,
+      "paramMapping": [
+        {
+          "from": "data",
+          "to": "output"
+        }
+      ],
+      "to": 7,
+      "data": {
+        "io": [
+          {
+            "input": "output",
+            "output": "data"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    },
+    {
+      "from": 4,
+      "paramMapping": [
+        {
+          "from": "data",
+          "to": "output"
+        }
+      ],
+      "to": 8,
+      "data": {
+        "io": [
+          {
+            "input": "output",
+            "output": "data"
+          }
+        ],
+        "isNew": false,
+        "isFocused": false
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "dataType": [
+        "text"
+      ],
+      "label": "retell_conversation",
+      "message": null,
+      "number": 0,
+      "position": {
+        "x": 272,
+        "y": 140
+      },
+      "type": "INPUT"
+    },
+    {
+      "assetId": "6646261c6eb563165658bbb1",
+      "assetType": "MODEL",
+      "autoSelectOptions": [],
+      "fileMetadata": "{}",
+      "function": "text-generation",
+      "functionType": "AI",
+      "inputValues": [
+        {
+          "code": "prompt",
+          "value": "You are a medical assistant AI that specializes in analyzing a list of symptoms provided by users. Your task is to determine whether the symptoms indicate a need for a blood test based on a predefined set of medical scenarios. The user will only provide their symptoms, with no additional context. Use the predefined cases to make your determination.\n\nConversation:\n```\n{text}\n```\n\nCases Where a Blood Test is Typically Required:\n\t1.\tGeneral Symptoms Suggesting Systemic Issues:\n\t•\tFatigue, weakness, or dizziness (possible anemia or vitamin deficiencies).\n\t•\tUnexplained weight loss or gain (possible thyroid or metabolic issues).\n\t•\tPersistent fever or chills (possible infection or inflammation).\n\t•\tJaundice or yellowing of the skin/eyes (liver issues).\n\t2.\tSymptoms Related to Chronic Conditions:\n\t•\tIncreased thirst, frequent urination (possible diabetes).\n\t•\tPalpitations, irregular heartbeat (possible thyroid issues or anemia).\n\t•\tPersistent swelling (possible kidney or heart issues).\n\t3.\tSigns of Infection or Inflammation:\n\t•\tSore throat with persistent symptoms (possible white blood cell evaluation).\n\t•\tSkin infections, redness, or unusual swelling (infection-related markers).\n\t4.\tBleeding or Bruising:\n\t•\tFrequent unexplained bruising or prolonged bleeding (possible platelet or clotting issues).\n\t5.\tOther Specific Indicators:\n\t•\tTingling or numbness in extremities (possible vitamin deficiency or metabolic issue).\n\t•\tDark urine or changes in bowel habits (possible liver or kidney issues).\n\nDecision-Making Guidelines:\n\t1.\tMatch to the List:\n\t•\tIf the user’s symptoms align with one or more cases in the list, mark as true.\n\t2.\tNo Match:\n\t•\tIf the symptoms do not align with any case, mark as false.\n\t3.\tUnclear or Non-Specific Symptoms:\n\t•\tIf the symptoms are vague or insufficient to determine the need, mark as false.\n\nOutput Format:\n\nThe output is JSON and must be structured as follows:\n{\n  \"isBloodtestRequired\": boolean\n}\n\nExample 1:\n\nInput:\n\t•\tUser: “I’ve been feeling extremely tired and losing weight recently.”\n\nOutput:\n{\n  \"isBloodtestRequired\": true\n}\n\nExample 2:\n\nInput:\n\t•\tUser: “I’ve had a minor headache for the past two days.”\n\nOutput:\n{\n  \"isBloodtestRequired\": false\n}\n\nExample 3:\n\nInput:\n\t•\tUser: “I’ve been feeling very thirsty and urinate frequently.”\n\nOutput:\n{\n  \"isBloodtestRequired\": true\n}\n\nYour Task is to:\n\t1.\tFocus on the user’s symptom descriptions.\n\t2.\tUse the predefined list of cases to assess the necessity of a blood test.\n\t3.\tEnsure that the output is strictly formatted as JSON with no additional commentary.\n\nProcess the provided symptoms and generate the JSON response accordingly.\n"
+        },
+        {
+          "code": "context",
+          "value": null
+        },
+        {
+          "code": "temperature",
+          "value": "0"
+        },
+        {
+          "code": "max_tokens",
+          "value": "20"
+        },
+        {
+          "code": "history",
+          "value": null
+        }
+      ],
+      "label": "isBloodtestRequired",
+      "number": 1,
+      "position": {
+        "x": 608,
+        "y": -104
+      },
+      "status": "Exists",
+      "type": "ASSET",
+      "model": {
+        "assetType": "model",
+        "benchmarkable": true,
+        "connectionType": [],
+        "createdAt": "2024-11-19T14:43:54.941Z",
+        "description": "Creates coherent and contextually relevant textual content based on prompts or certain parameters. Useful for chatbots, content creation, and data augmentation.",
+        "developer": "OpenAI",
+        "executionEndpoint": "https://models.aixplain.com/api/v1/execute",
+        "function": "text-generation",
+        "functionData": {
+          "benchmarkable": true,
+          "code": "text-generation",
+          "input": [
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "text",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Text",
+              "relatedFunction": null,
+              "required": true,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "prompt",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Prompt",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "context",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Context",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "language",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Language",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "script",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Script",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            }
+          ],
+          "isDummy": null,
+          "name": "Text Generation",
+          "output": [
+            {
+              "code": "data",
+              "dataType": "text",
+              "__typename": "FunctionOutput"
+            }
+          ],
+          "rules": [
+            "isLanguageBased",
+            "isReferenceRequired"
+          ],
+          "status": "onboarded",
+          "type": "AI",
+          "__typename": "Function"
+        },
+        "hostedBy": "OpenAI",
+        "id": "6646261c6eb563165658bbb1",
+        "in": "",
+        "inDataTypes": [
+          "text"
+        ],
+        "input": [
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": true,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "text",
+            "name": "Text",
+            "dataSubType": "json",
+            "dataType": "text",
+            "defaultValue": null,
+            "example": "[{\"role\": \"user\", \"content\": \"Hello ChatGPT!\"}, {\"role\":\"assistant\",\"content\":\"\\n\\nHello there! How may I assist you today?\"}, {\"role\": \"user\", \"content\": \"Can you help me write?\"}]",
+            "fixed": false,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "template",
+            "name": "Template",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Template",
+                "value": "[{\"role\": \"user\", \"content\": \"<data>\"}]",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "prompt",
+            "name": "Prompt",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": true,
+            "value": [
+              {
+                "label": "Prompt",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "context",
+            "name": "Context",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Context",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "language",
+            "name": "Language",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "English",
+                "value": "en",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "script",
+            "name": "Script",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": [],
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "temperature",
+            "name": "Temperature",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "0",
+                "value": "0",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "max_tokens",
+            "name": "Max Tokens",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "200",
+                "value": "200",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "history",
+            "name": "History",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "default",
+                "value": "",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "default",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          }
+        ],
+        "isExecutable": true,
+        "isFineTunable": false,
+        "isTransferable": false,
+        "latestPrice": {
+          "unitPrice": 0.000015,
+          "unitPriceRangeFrom": 0.000005,
+          "unitPriceRangeTo": 0.000015,
+          "unitType": "TOKEN",
+          "unitTypeScale": null,
+          "__typename": "ModelPrice"
+        },
+        "name": "GPT-4o",
+        "out": "",
+        "outDataTypes": [
+          "text"
+        ],
+        "output": [
+          {
+            "code": "data",
+            "dataSubType": null,
+            "dataType": "text",
+            "example": null,
+            "pipelineConfig": {
+              "allowedNodeTypes": [],
+              "__typename": "ModelOutputPipelineConfig"
+            },
+            "__typename": "ModelOutput"
+          }
+        ],
+        "privacy": "Public",
+        "status": "onboarded",
+        "subscribed": true,
+        "subscription": {
+          "id": "677643b29ce39298446a6bc5",
+          "__typename": "AssetSubscription"
+        },
+        "teamData": {
+          "id": 1777,
+          "name": "OpenAI",
+          "__typename": "ShortTeam"
+        },
+        "totalSubscribed": 3,
+        "type": "REGULAR",
+        "versioning": {
+          "key": "00f0536c-3c2f-4baf-a1db-833fde75f343",
+          "tag": "initial",
+          "tags": [
+            "initial"
+          ],
+          "__typename": "ResourceInfo"
+        },
+        "__typename": "Model"
+      }
+    },
+    {
+      "assetId": "6646261c6eb563165658bbb1",
+      "assetType": "MODEL",
+      "autoSelectOptions": [],
+      "fileMetadata": "{}",
+      "function": "text-generation",
+      "functionType": "AI",
+      "inputValues": [
+        {
+          "code": "prompt",
+          "value": "You are a medical assistant AI specializing in analyzing a list of symptoms provided by users. Your task is to determine whether the symptoms indicate a need for an MRI based on a predefined set of medical scenarios. The user will only provide their symptoms, with no additional context. Use the predefined cases to make your determination.\n\nCases Where an MRI is Typically Required:\n\t1.\tNeurological Symptoms:\n\t•\tPersistent severe headaches or migraines, especially with vision changes or nausea.\n\t•\tUnexplained dizziness, balance issues, or coordination problems.\n\t•\tSeizures or sudden changes in consciousness.\n\t•\tWeakness, numbness, or tingling in specific body parts.\n\t•\tSudden vision loss or double vision.\n\t2.\tBack and Spine Issues:\n\t•\tSevere, persistent back pain, especially if accompanied by leg pain or numbness (possible disc herniation or nerve compression).\n\t•\tLoss of bowel or bladder control (possible spinal cord compression).\n\t•\tUnexplained spinal pain after trauma.\n\t3.\tJoint or Soft Tissue Problems:\n\t•\tSevere joint pain or swelling that does not improve with initial treatments.\n\t•\tSuspected ligament or tendon tears (e.g., ACL tear in the knee, rotator cuff tear in the shoulder).\n\t4.\tSuspected Tumors or Cancer:\n\t•\tUnexplained lumps or masses, especially if growing or associated with other symptoms.\n\t•\tSymptoms suggesting brain or spinal cord tumors.\n\t5.\tTrauma or Injury:\n\t•\tHead injuries with persistent symptoms such as confusion, headaches, or memory loss.\n\t•\tSuspected fractures or injuries not visible on X-rays.\n\t6.\tOther Specific Scenarios:\n\t•\tUnexplained hearing loss, tinnitus, or balance issues.\n\t•\tChronic pain with no clear diagnosis after other imaging tests.\n\nDecision-Making Guidelines:\n\t1.\tMatch to the List:\n\t•\tIf the user’s symptoms align with one or more cases in the list, mark as true.\n\t2.\tNo Match:\n\t•\tIf the symptoms do not align with any case, mark as false.\n\t3.\tUnclear or Non-Specific Symptoms:\n\t•\tIf the symptoms are vague or insufficient to determine the need, mark as false.\n\nOutput Format: \nThe output must be JSON and structured as follows:\n{\n  \"isMRIRequired\": boolean\n}\n\nExample 1: Input: “I’ve been having severe headaches and blurry vision for weeks.” Output:\n{\n  \"isMRIRequired\": true\n}\n\nExample 2: Input: “I twisted my ankle while running, and it’s slightly swollen.” \nOutput:\n{\n  \"isMRIRequired\": false\n}\n\nExample 3: Input: “I’ve been experiencing numbness and tingling in my left arm.” Output:\n{\n  \"isMRIRequired\": true\n}\n\nRequirements for the LLM:\n\t1.\tFocus on the user’s symptom descriptions.\n\t2.\tUse the predefined list of cases to assess the necessity of an MRI.\n\t3.\tEnsure that the output is strictly formatted as JSON with no additional commentary.\n\nProcess the provided symptoms and generate the JSON response accordingly."
+        },
+        {
+          "code": "context",
+          "value": null
+        },
+        {
+          "code": "temperature",
+          "value": "0"
+        },
+        {
+          "code": "max_tokens",
+          "value": "20"
+        },
+        {
+          "code": "history",
+          "value": null
+        }
+      ],
+      "label": "isMRIrequired",
+      "number": 2,
+      "position": {
+        "x": 608,
+        "y": 40
+      },
+      "status": "Exists",
+      "type": "ASSET",
+      "model": {
+        "assetType": "model",
+        "benchmarkable": true,
+        "connectionType": [],
+        "createdAt": "2024-11-19T14:43:54.941Z",
+        "description": "Creates coherent and contextually relevant textual content based on prompts or certain parameters. Useful for chatbots, content creation, and data augmentation.",
+        "developer": "OpenAI",
+        "executionEndpoint": "https://models.aixplain.com/api/v1/execute",
+        "function": "text-generation",
+        "functionData": {
+          "benchmarkable": true,
+          "code": "text-generation",
+          "input": [
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "text",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Text",
+              "relatedFunction": null,
+              "required": true,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "prompt",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Prompt",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "context",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Context",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "language",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Language",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "script",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Script",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            }
+          ],
+          "isDummy": null,
+          "name": "Text Generation",
+          "output": [
+            {
+              "code": "data",
+              "dataType": "text",
+              "__typename": "FunctionOutput"
+            }
+          ],
+          "rules": [
+            "isLanguageBased",
+            "isReferenceRequired"
+          ],
+          "status": "onboarded",
+          "type": "AI",
+          "__typename": "Function"
+        },
+        "hostedBy": "OpenAI",
+        "id": "6646261c6eb563165658bbb1",
+        "in": "",
+        "inDataTypes": [
+          "text"
+        ],
+        "input": [
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": true,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "text",
+            "name": "Text",
+            "dataSubType": "json",
+            "dataType": "text",
+            "defaultValue": null,
+            "example": "[{\"role\": \"user\", \"content\": \"Hello ChatGPT!\"}, {\"role\":\"assistant\",\"content\":\"\\n\\nHello there! How may I assist you today?\"}, {\"role\": \"user\", \"content\": \"Can you help me write?\"}]",
+            "fixed": false,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "template",
+            "name": "Template",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Template",
+                "value": "[{\"role\": \"user\", \"content\": \"<data>\"}]",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "prompt",
+            "name": "Prompt",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": true,
+            "value": [
+              {
+                "label": "Prompt",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "context",
+            "name": "Context",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Context",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "language",
+            "name": "Language",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "English",
+                "value": "en",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "script",
+            "name": "Script",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": [],
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "temperature",
+            "name": "Temperature",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "0",
+                "value": "0",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "max_tokens",
+            "name": "Max Tokens",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "200",
+                "value": "200",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "history",
+            "name": "History",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "default",
+                "value": "",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "default",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          }
+        ],
+        "isExecutable": true,
+        "isFineTunable": false,
+        "isTransferable": false,
+        "latestPrice": {
+          "unitPrice": 0.000015,
+          "unitPriceRangeFrom": 0.000005,
+          "unitPriceRangeTo": 0.000015,
+          "unitType": "TOKEN",
+          "unitTypeScale": null,
+          "__typename": "ModelPrice"
+        },
+        "name": "GPT-4o",
+        "out": "",
+        "outDataTypes": [
+          "text"
+        ],
+        "output": [
+          {
+            "code": "data",
+            "dataSubType": null,
+            "dataType": "text",
+            "example": null,
+            "pipelineConfig": {
+              "allowedNodeTypes": [],
+              "__typename": "ModelOutputPipelineConfig"
+            },
+            "__typename": "ModelOutput"
+          }
+        ],
+        "privacy": "Public",
+        "status": "onboarded",
+        "subscribed": true,
+        "subscription": {
+          "id": "677643b29ce39298446a6bc5",
+          "__typename": "AssetSubscription"
+        },
+        "teamData": {
+          "id": 1777,
+          "name": "OpenAI",
+          "__typename": "ShortTeam"
+        },
+        "totalSubscribed": 3,
+        "type": "REGULAR",
+        "versioning": {
+          "key": "00f0536c-3c2f-4baf-a1db-833fde75f343",
+          "tag": "initial",
+          "tags": [
+            "initial"
+          ],
+          "__typename": "ResourceInfo"
+        },
+        "__typename": "Model"
+      }
+    },
+    {
+      "assetId": "671be4c46eb563a2736ded61",
+      "assetType": "MODEL",
+      "autoSelectOptions": [],
+      "fileMetadata": "{}",
+      "function": "text-generation",
+      "functionType": "AI",
+      "inputValues": [
+        {
+          "code": "prompt",
+          "value": "You are a conversational summarizer AI specializing in analyzing transcribed calls between healthcare professionals and patients. Your task is to extract a detailed summary of the patient’s primary concern or problem based on the conversation. The input will be a transcription of a call where the patient describes their symptoms or issues, and your output should distill the core problem into a structured format.\n\nRules for Summarizing:\n\t1.\tFocus on the Patient’s Concerns:\n\t•\tIdentify the key issue or symptom(s) mentioned by the patient.\n\t•\tPrioritize the main complaint while including any relevant context provided during the call.\n\t2.\tExclude Extraneous Information:\n\t•\tOmit conversational fillers, irrelevant details, or background noise descriptions.\n\t•\tEnsure the summary captures only the patient’s primary concern as described during the call.\n\t3.\tFormatting Requirements:\n\t•\tOutput the summary in JSON format as follows:\n{\n  \"problemSummary\": \"string\"\n}\n•\tReplace \"string\" with a clear and concise summary of the patient’s issue.\n\nRequirements:\n\t1.\tFocus exclusively on the transcribed call to generate the summary.\n\t2.\tAvoid additional commentary or contextual guesses.\n\t3.\tEnsure clarity, brevity, and strict adherence to the JSON format.\n\nProcess the transcribed call provided and generate the JSON response with the summarized problem accordingly."
+        },
+        {
+          "code": "context"
+        },
+        {
+          "code": "temperature",
+          "value": "0"
+        },
+        {
+          "code": "max_tokens",
+          "value": "2048"
+        },
+        {
+          "code": "top_p"
+        },
+        {
+          "code": "history",
+          "value": ""
+        }
+      ],
+      "label": "problemSummary",
+      "number": 3,
+      "position": {
+        "x": 608,
+        "y": 184
+      },
+      "status": "Exists",
+      "type": "ASSET",
+      "model": {
+        "__typename": "Model",
+        "assetType": "model",
+        "benchmarkable": true,
+        "connectionType": [],
+        "createdAt": "2024-11-19T14:44:11.344Z",
+        "description": "Creates coherent and contextually relevant textual content based on prompts or certain parameters. Useful for chatbots, content creation, and data augmentation.",
+        "developer": "Anthropic",
+        "executionEndpoint": "https://models.aixplain.com/api/v1/execute",
+        "function": "text-generation",
+        "functionData": {
+          "__typename": "Function",
+          "benchmarkable": true,
+          "code": "text-generation",
+          "input": [
+            {
+              "__typename": "FunctionInput",
+              "allowedRange": {
+                "__typename": "AllowedRange",
+                "from": null,
+                "to": null
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "text",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Text",
+              "relatedFunction": null,
+              "required": true
+            },
+            {
+              "__typename": "FunctionInput",
+              "allowedRange": {
+                "__typename": "AllowedRange",
+                "from": null,
+                "to": null
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "prompt",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Prompt",
+              "relatedFunction": null,
+              "required": false
+            },
+            {
+              "__typename": "FunctionInput",
+              "allowedRange": {
+                "__typename": "AllowedRange",
+                "from": null,
+                "to": null
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "context",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Context",
+              "relatedFunction": null,
+              "required": false
+            },
+            {
+              "__typename": "FunctionInput",
+              "allowedRange": {
+                "__typename": "AllowedRange",
+                "from": null,
+                "to": null
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "language",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Language",
+              "relatedFunction": null,
+              "required": false
+            },
+            {
+              "__typename": "FunctionInput",
+              "allowedRange": {
+                "__typename": "AllowedRange",
+                "from": null,
+                "to": null
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "script",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Script",
+              "relatedFunction": null,
+              "required": false
+            }
+          ],
+          "isDummy": null,
+          "name": "Text Generation",
+          "output": [
+            {
+              "__typename": "FunctionOutput",
+              "code": "data",
+              "dataType": "text"
+            }
+          ],
+          "rules": [
+            "isLanguageBased",
+            "isReferenceRequired"
+          ],
+          "status": "onboarded",
+          "type": "AI"
+        },
+        "hostedBy": "AWS",
+        "id": "671be4c46eb563a2736ded61",
+        "in": "",
+        "inDataTypes": [
+          "text"
+        ],
+        "input": [
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": true,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "text",
+            "name": "Text",
+            "dataSubType": "json",
+            "dataType": "text",
+            "defaultValue": null,
+            "example": "",
+            "fixed": false,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": []
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "template",
+            "name": "Template",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "__typename": "DataValue",
+                "label": "Template",
+                "value": "[{\"role\": \"user\", \"content\":  [{ \"text\": \"<data>\" }]   }]"
+              }
+            ]
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "prompt",
+            "name": "Prompt",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": true,
+            "value": [
+              {
+                "__typename": "DataValue",
+                "label": "Prompt",
+                "value": " "
+              }
+            ]
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "context",
+            "name": "Context",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "__typename": "DataValue",
+                "label": "Context",
+                "value": " "
+              }
+            ]
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "language",
+            "name": "Language",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "__typename": "DataValue",
+                "label": "English",
+                "value": "en"
+              }
+            ]
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "script",
+            "name": "Script",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": [],
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": []
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "temperature",
+            "name": "Temperature",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "__typename": "DataValue",
+                "label": "1",
+                "value": "1"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "max_tokens",
+            "name": "Max Tokens",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "__typename": "DataValue",
+                "label": "2048",
+                "value": "2048"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "top_p",
+            "name": "Top P",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null
+          },
+          {
+            "__typename": "ModelInput",
+            "allowedRange": {
+              "__typename": "AllowedRange",
+              "from": null,
+              "to": null
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "history",
+            "name": "History",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "__typename": "DataValue",
+                "label": "default",
+                "value": ""
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "__typename": "DataValue",
+                "label": "default",
+                "value": " "
+              }
+            ]
+          }
+        ],
+        "isExecutable": true,
+        "isFineTunable": false,
+        "isTransferable": false,
+        "latestPrice": {
+          "__typename": "ModelPrice",
+          "unitPrice": 0.000015,
+          "unitPriceRangeFrom": 0.000003,
+          "unitPriceRangeTo": 0.000015,
+          "unitType": "TOKEN",
+          "unitTypeScale": null
+        },
+        "name": "Anthropic Claude 3.5 Sonnet v2",
+        "out": "",
+        "outDataTypes": [
+          "text"
+        ],
+        "output": [
+          {
+            "__typename": "ModelOutput",
+            "code": "data",
+            "dataSubType": null,
+            "dataType": "text",
+            "example": null,
+            "pipelineConfig": {
+              "__typename": "ModelOutputPipelineConfig",
+              "allowedNodeTypes": []
+            }
+          }
+        ],
+        "privacy": "Public",
+        "status": "onboarded",
+        "subscribed": true,
+        "subscription": {
+          "id": "6784d7db7fbcb5fa9a62b45d"
+        },
+        "teamData": {
+          "__typename": "ShortTeam",
+          "id": 1763,
+          "name": "AWS"
+        },
+        "totalSubscribed": 3,
+        "type": "REGULAR",
+        "versioning": {
+          "__typename": "ResourceInfo",
+          "key": "f0ab1afb-9532-40bc-8e0a-7349a87ab832",
+          "tag": "initial",
+          "tags": [
+            "initial"
+          ]
+        },
+        "modelStats": {
+          "__typename": "ModelStats",
+          "apiAttemptsAvgLatencyInSecs": 4.445577251808019,
+          "apiAttemptsAvgLatencyInSecsPerVolumeUnit": 0.009983880731885936,
+          "apiAttemptsFailed": 43,
+          "apiAttemptsInputUnit": "CHAR",
+          "apiAttemptsInputUnitScale": null,
+          "apiAttemptsSuccess": 1521
+        }
+      }
+    },
+    {
+      "assetId": "6646261c6eb563165658bbb1",
+      "assetType": "MODEL",
+      "autoSelectOptions": [],
+      "fileMetadata": "{}",
+      "function": "text-generation",
+      "functionType": "AI",
+      "inputValues": [
+        {
+          "code": "prompt",
+          "value": "You are a conversational data extraction AI designed to analyze transcriptions of calls between healthcare professionals and patients. Your task is to extract the patient’s name, age, and pain degree (on a scale of 1 to 10) from the conversation. The input will be a transcription of a call, and your output must be formatted as structured JSON.\n\nRules for Extraction:\n\t1.\tName Extraction:\n\t•\tIdentify the patient’s name as mentioned during the call.\n\t•\tIf the name is not explicitly provided, output \"unknown\" for the name.\n\t2.\tAge Extraction:\n\t•\tCapture the patient’s age if explicitly mentioned.\n\t•\tIf the age is not mentioned, output \"unknown\" for the age.\n\t3.\tPain Degree Extraction:\n\t•\tExtract the pain degree if the patient provides a numerical value (between 1 and 10) when describing their pain.\n\t•\tIf the pain degree is not mentioned, output \"unknown\" for the pain degree.\n\t4.\tFormatting Requirements:\n\t•\tOutput the extracted information in JSON format as follows:\n{\n  \"name\": \"string\",\n  \"age\": \"number\",\n  \"painDegree\": \"number\"\n}\n\t•\tReplace \"string\" or \"number\" with the extracted data or \"unknown\" if the data is unavailable.\n\nRequirements:\n\t1.\tAnalyze the transcription to extract the patient’s name, age, and pain degree.\n\t2.\tOutput \"unknown\" if any of the data points are missing or not mentioned.\n\t3.\tEnsure the output strictly adheres to the specified JSON format with no additional commentary.\n\nProcess the transcribed call provided and generate the JSON response with the extracted data accordingly"
+        },
+        {
+          "code": "context",
+          "value": null
+        },
+        {
+          "code": "temperature",
+          "value": "0"
+        },
+        {
+          "code": "max_tokens",
+          "value": "200"
+        },
+        {
+          "code": "history",
+          "value": null
+        }
+      ],
+      "label": "nameAgePaindegree",
+      "number": 4,
+      "position": {
+        "x": 608,
+        "y": 328
+      },
+      "status": "Exists",
+      "type": "ASSET",
+      "model": {
+        "assetType": "model",
+        "benchmarkable": true,
+        "connectionType": [],
+        "createdAt": "2024-11-19T14:43:54.941Z",
+        "description": "Creates coherent and contextually relevant textual content based on prompts or certain parameters. Useful for chatbots, content creation, and data augmentation.",
+        "developer": "OpenAI",
+        "executionEndpoint": "https://models.aixplain.com/api/v1/execute",
+        "function": "text-generation",
+        "functionData": {
+          "benchmarkable": true,
+          "code": "text-generation",
+          "input": [
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "text",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Text",
+              "relatedFunction": null,
+              "required": true,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "prompt",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Prompt",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "context",
+              "dataSubType": null,
+              "dataType": "text",
+              "defaultValue": [],
+              "fixed": false,
+              "name": "Context",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "language",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Language",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            },
+            {
+              "allowedRange": {
+                "from": null,
+                "to": null,
+                "__typename": "AllowedRange"
+              },
+              "allowMulti": false,
+              "allowMultipleConnections": false,
+              "availableOptions": [],
+              "code": "script",
+              "dataSubType": null,
+              "dataType": "label",
+              "defaultValue": [],
+              "fixed": true,
+              "name": "Script",
+              "relatedFunction": null,
+              "required": false,
+              "__typename": "FunctionInput"
+            }
+          ],
+          "isDummy": null,
+          "name": "Text Generation",
+          "output": [
+            {
+              "code": "data",
+              "dataType": "text",
+              "__typename": "FunctionOutput"
+            }
+          ],
+          "rules": [
+            "isLanguageBased",
+            "isReferenceRequired"
+          ],
+          "status": "onboarded",
+          "type": "AI",
+          "__typename": "Function"
+        },
+        "hostedBy": "OpenAI",
+        "id": "6646261c6eb563165658bbb1",
+        "in": "",
+        "inDataTypes": [
+          "text"
+        ],
+        "input": [
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": true,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "text",
+            "name": "Text",
+            "dataSubType": "json",
+            "dataType": "text",
+            "defaultValue": null,
+            "example": "[{\"role\": \"user\", \"content\": \"Hello ChatGPT!\"}, {\"role\":\"assistant\",\"content\":\"\\n\\nHello there! How may I assist you today?\"}, {\"role\": \"user\", \"content\": \"Can you help me write?\"}]",
+            "fixed": false,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "template",
+            "name": "Template",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Template",
+                "value": "[{\"role\": \"user\", \"content\": \"<data>\"}]",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "prompt",
+            "name": "Prompt",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": true,
+            "value": [
+              {
+                "label": "Prompt",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "context",
+            "name": "Context",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": null,
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "Context",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "language",
+            "name": "Language",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": null,
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": true,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "English",
+                "value": "en",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "script",
+            "name": "Script",
+            "dataSubType": null,
+            "dataType": "label",
+            "defaultValue": [],
+            "example": null,
+            "fixed": true,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "temperature",
+            "name": "Temperature",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "0",
+                "value": "0",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "max_tokens",
+            "name": "Max Tokens",
+            "dataSubType": "number",
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "200",
+                "value": "200",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": null,
+            "__typename": "ModelInput"
+          },
+          {
+            "allowedRange": {
+              "from": null,
+              "to": null,
+              "__typename": "AllowedRange"
+            },
+            "allowMulti": false,
+            "allowMultipleConnections": false,
+            "availableOptions": [],
+            "code": "history",
+            "name": "History",
+            "dataSubType": null,
+            "dataType": "text",
+            "defaultValue": [
+              {
+                "label": "default",
+                "value": "",
+                "__typename": "DataValue"
+              }
+            ],
+            "example": null,
+            "fixed": false,
+            "relatedFunction": null,
+            "required": false,
+            "supportedFileTypes": [],
+            "supportsVariables": false,
+            "value": [
+              {
+                "label": "default",
+                "value": " ",
+                "__typename": "DataValue"
+              }
+            ],
+            "__typename": "ModelInput"
+          }
+        ],
+        "isExecutable": true,
+        "isFineTunable": false,
+        "isTransferable": false,
+        "latestPrice": {
+          "unitPrice": 0.000015,
+          "unitPriceRangeFrom": 0.000005,
+          "unitPriceRangeTo": 0.000015,
+          "unitType": "TOKEN",
+          "unitTypeScale": null,
+          "__typename": "ModelPrice"
+        },
+        "name": "GPT-4o",
+        "out": "",
+        "outDataTypes": [
+          "text"
+        ],
+        "output": [
+          {
+            "code": "data",
+            "dataSubType": null,
+            "dataType": "text",
+            "example": null,
+            "pipelineConfig": {
+              "allowedNodeTypes": [],
+              "__typename": "ModelOutputPipelineConfig"
+            },
+            "__typename": "ModelOutput"
+          }
+        ],
+        "privacy": "Public",
+        "status": "onboarded",
+        "subscribed": true,
+        "subscription": {
+          "id": "677643b29ce39298446a6bc5",
+          "__typename": "AssetSubscription"
+        },
+        "teamData": {
+          "id": 1777,
+          "name": "OpenAI",
+          "__typename": "ShortTeam"
+        },
+        "totalSubscribed": 3,
+        "type": "REGULAR",
+        "versioning": {
+          "key": "00f0536c-3c2f-4baf-a1db-833fde75f343",
+          "tag": "initial",
+          "tags": [
+            "initial"
+          ],
+          "__typename": "ResourceInfo"
+        },
+        "__typename": "Model"
+      }
+    },
+    {
+      "dataType": [
+        "text"
+      ],
+      "label": "isBloodtestRequiredAnswer",
+      "message": null,
+      "number": 5,
+      "position": {
+        "x": 992,
+        "y": -84
+      },
+      "type": "OUTPUT"
+    },
+    {
+      "dataType": [
+        "text"
+      ],
+      "label": "isMRIRequiredAnswer",
+      "message": null,
+      "number": 6,
+      "position": {
+        "x": 992.0000000000001,
+        "y": 60
+      },
+      "type": "OUTPUT"
+    },
+    {
+      "dataType": [
+        "text"
+      ],
+      "label": "problemSummaryOutput",
+      "number": 7,
+      "position": {
+        "x": 992,
+        "y": 204
+      },
+      "type": "OUTPUT"
+    },
+    {
+      "dataType": [
+        "text"
+      ],
+      "label": "nameAgePaindegreeOutput",
+      "number": 8,
+      "position": {
+        "x": 992.0000000000001,
+        "y": 348
+      },
+      "type": "OUTPUT"
+    },
+    {
+      "label": "Router 2",
+      "number": 9,
+      "position": {
+        "x": 416,
+        "y": 112.00000000000003
+      },
+      "routes": [
+        {
+          "operation": "equal",
+          "path": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "checkType",
+          "value": "text"
+        }
+      ],
+      "type": "ROUTER"
+    }
+  ]
+}
